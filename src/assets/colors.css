@@ -1,0 +1,51 @@
+@layer theme {
+  :root {
+    /* Color Variables */
+    --color-isabelline: #FAF6F2;
+    --color-linen: #FBF1E5;
+    --color-timberwolf: #DCD5CE;
+    --color-platinum: #D3D7DA;
+    --color-columbia-blue: #B0C8D3;
+    --color-raisin-black: #292522;
+  }
+}
+
+@layer utilities {
+  .bg-isabelline {
+    background-color: var(--color-isabelline);
+  }
+  .bg-linen {
+    background-color: var(--color-linen);
+  }
+  .bg-timberwolf {
+    background-color: var(--color-timberwolf);
+  }
+  .bg-platinum {
+    background-color: var(--color-platinum);
+  }
+  .bg-columbia-blue {
+    background-color: var(--color-columbia-blue);
+  }
+  .bg-raisin-black {
+    background-color: var(--color-raisin-black);
+  }
+  
+  .text-isabelline {
+    color: var(--color-isabelline);
+  }
+  .text-linen {
+    color: var(--color-linen);
+  }
+  .text-timberwolf {
+    color: var(--color-timberwolf);
+  }
+  .text-platinum {
+    color: var(--color-platinum);
+  }
+  .text-columbia-blue {
+    color: var(--color-columbia-blue);
+  }
+  .text-raisin-black {
+    color: var(--color-raisin-black);
+  }
+} 

@@ -1,0 +1,81 @@
+@layer base {
+  /* Base font styles */
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* prevent text highight */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Box sizing rules */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* Reset margins and padding for specific elements only (not universal) */
+  body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ul, ol {
+    margin: 0;
+  }
+
+  /* Typography */
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Media Defaults */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Form Elements */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* Text Overflow */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Aeonik', sans-serif;
+  }
+
+  /* Fluid Typography Scale */
+  :root {
+    --text-xs: clamp(0.875rem, 0.875rem + 0vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.875rem + 0vw, 0.875rem);
+    --text-base: clamp(1rem, 0.986rem + 0.07vw, 1.05rem);
+    --text-lg: clamp(1rem, 0.986rem + 0.07vw, 1.05rem);
+    --text-xl: clamp(1.14rem, 1.106rem + 0.17vw, 1.26rem);
+    --text-2xl: clamp(1rem, 1rem + 0vw, 1rem);
+    --text-3xl: clamp(1.26rem, 1.222rem + 0.19vw, 1.39rem);
+    --text-4xl: clamp(1.59rem, 1.492rem + 0.49vw, 1.93rem);
+    --text-5xl: clamp(2rem, 1.802rem + 0.99vw, 2.69rem);
+    --text-6xl: clamp(2.52rem, 2.174rem + 1.73vw, 3.73rem);
+    --text-7xl: clamp(3.18rem, 2.606rem + 2.87vw, 5.19rem);
+    --text-8xl: clamp(4rem, 3.082rem + 4.59vw, 7.21rem);
+    --text-9xl: clamp(4rem, 3.082rem + 4.59vw, 7.21rem);
+  }
+} 
