@@ -1,6 +1,6 @@
 <script setup>
 import HomepageNav from '../components/HomepageNav.vue';
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import emblaCarouselVue from 'embla-carousel-vue'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
@@ -134,25 +134,68 @@ const addAutoplayProgressListeners = (emblaApi, progressNode) => {
 }
 
 const addScaleAnimation = (emblaApi) => {
-  const removeSelectedClasses = () => {
-    emblaApi.slideNodes().forEach((slide) => {
-      slide.classList.remove('is-selected')
+  const scaleNodes = emblaApi.slideNodes().map(slide => slide.querySelector('img'))
+  
+  const startScale = () => {
+    const autoplay = emblaApi?.plugins()?.autoplay
+    if (!autoplay) return
+
+    const timeUntilNext = autoplay.timeUntilNext()
+    if (timeUntilNext === null) return
+
+    const selectedSlide = emblaApi.selectedScrollSnap()
+    const selectedNode = scaleNodes[selectedSlide]
+    
+    if (selectedNode) {
+      selectedNode.style.transition = 'none'
+      selectedNode.style.transform = 'scale(1.05)'
+      
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          selectedNode.style.transition = `transform ${timeUntilNext}ms linear`
+          selectedNode.style.transform = 'scale(1)'
+        }, 0)
+      })
+    }
+  }
+
+  const stopScale = () => {
+    scaleNodes.forEach(node => {
+      if (node) {
+        node.style.transition = 'none'
+        node.style.transform = 'scale(1.05)'
+      }
     })
   }
 
-  const addSelectedClass = () => {
-    const selectedSlide = emblaApi.selectedScrollSnap()
-    emblaApi.slideNodes()[selectedSlide].classList.add('is-selected')
+  emblaApi
+    .on('autoplay:timerset', startScale)
+    .on('autoplay:timerstopped', stopScale)
+    .on('select', startScale)
+
+  return () => {
+    emblaApi
+      .off('autoplay:timerset', startScale)
+      .off('autoplay:timerstopped', stopScale)
+      .off('select', startScale)
   }
-
-  emblaApi.on('select', () => {
-    removeSelectedClasses()
-    addSelectedClass()
-  })
-
-  // Initial setup
-  addSelectedClass()
 }
+
+// Debounce function to limit resize handler calls
+const debounce = (fn, delay) => {
+  let timeoutId
+  return (...args) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
+
+// Handle window resize
+const handleResize = debounce(() => {
+  if (emblaApi.value) {
+    emblaApi.value.reInit()
+  }
+}, 250)
 
 onMounted(() => {
   if (emblaApi.value) {
@@ -184,23 +227,28 @@ onMounted(() => {
       }, 0)
     }
 
+    // Add resize event listener
+    window.addEventListener('resize', handleResize)
+
     return () => {
       cleanupButtons()
       cleanupProgress()
       emblaApi.value.off('select', updateSlideText)
+      window.removeEventListener('resize', handleResize)
     }
   }
 })
 </script>
 
 <template>
-  <div class="embla homepage-body relative z-2 w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
-    <HomepageNav />
-    <div class="flex flex-col gap-8 lg:grid lg:grid-cols-4 flex-grow ">
+  <div class="homepage-container bg-raisin-black">
+    <div class="embla homepage-body relative z-2 w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
+      <HomepageNav />
+      <div class="flex flex-col gap-8 lg:grid lg:grid-cols-4 flex-grow ">
       <div class="flex flex-col flex-grow gap-12 items-start justify-end text-linen pt-12 lg:pt-48 lg:col-span-3">
-        <h1 class="text-8xl leading-[0.875em] tracking-[-0.025em] text-balance">Small. Quiet. Built for people who
+        <h1 class="text-8xl leading-[0.875em] tracking-[-0.025em] text-balance max-w-[18ch]">Small. Quiet. <br />Built for people who
           actually work.</h1>
-        <p class="text-xs leading-[1.25em] uppercase tracking-[0.025em] font-inter font-medium">16 fixed desks. No hot
+        <p class="text-xs leading-[1.25em] uppercase tracking-[0.025em] font-inter font-medium font-aeonik-fono">16 fixed desks. No hot
           desk circus. <br />No desk thieves.</p>
       </div>
       <div class="flex flex-col gap-4 items-end justify-end text-linen">
@@ -208,7 +256,7 @@ onMounted(() => {
           <div class="embla__progress col-span-4" ref="progressNode">
             <div class="embla__progress__bar"></div>
           </div>
-          <div class="text-sm m-0 col-span-2" ref="slideTextNode">Common Space</div>
+          <div class="text-sm m-0 col-span-2 font-aeonik-fono" ref="slideTextNode">Common Space</div>
           <div class="embla__buttons col-span-2 flex gap-12 justify-end">
             <button ref="prevBtn" class="embla__button embla__button--prev" type="button">
               <svg class="nav-link-arrow" width="0.875em" height="0.875em" viewBox="0 0 22 22" fill="none"
@@ -247,9 +295,19 @@ onMounted(() => {
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .homepage-body {
   --nav-link-bg: transparent;
   --nav-link-border: var(--color-linen);
@@ -257,6 +315,11 @@ onMounted(() => {
   --nav-link-bg-hover: var(--color-linen);
   --nav-link-text-hover: var(--color-raisin-black);
   --nav-link-border-hover: transparent;
+}
+
+.embla__viewport {
+  opacity: 0;
+  animation: fade-in 1s ease-out forwards;
 }
 
 @keyframes scale-down {
@@ -325,10 +388,7 @@ onMounted(() => {
   object-fit: cover;
   object-position: center;
   will-change: transform;
-}
-
-.embla__slide.is-selected img {
-  animation: scale-down 6s linear forwards;
+  transform: scale(1.05);
 }
 
 .embla__button {

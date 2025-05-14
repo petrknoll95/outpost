@@ -51,6 +51,10 @@
     margin: 0;
     padding: 0;
   }
+
+  .font-aeonik-fono {
+    font-family: 'Aeonik-Fono', sans-serif;
+  }
 }
 
 /* Dark/light mode */
