@@ -6,7 +6,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
 import AutoHeight from 'embla-carousel-auto-height';
 
-const [emblaRef, emblaApi] = emblaCarouselVue({ loop: false }, [
+const [emblaRef, emblaApi] = emblaCarouselVue({ loop: true }, [
   Autoplay({ delay: 6000, stopOnInteraction: false }), 
   Fade(),
   AutoHeight()
@@ -133,6 +133,27 @@ const addAutoplayProgressListeners = (emblaApi, progressNode) => {
   }
 }
 
+const addScaleAnimation = (emblaApi) => {
+  const removeSelectedClasses = () => {
+    emblaApi.slideNodes().forEach((slide) => {
+      slide.classList.remove('is-selected')
+    })
+  }
+
+  const addSelectedClass = () => {
+    const selectedSlide = emblaApi.selectedScrollSnap()
+    emblaApi.slideNodes()[selectedSlide].classList.add('is-selected')
+  }
+
+  emblaApi.on('select', () => {
+    removeSelectedClasses()
+    addSelectedClass()
+  })
+
+  // Initial setup
+  addSelectedClass()
+}
+
 onMounted(() => {
   if (emblaApi.value) {
     console.log(emblaApi.value.slideNodes()) // Access API
@@ -146,6 +167,9 @@ onMounted(() => {
       progressNode.value
     )
 
+    // Add scale animation
+    addScaleAnimation(emblaApi.value)
+
     // Add select listener for autoplay slide changes
     emblaApi.value.on('select', updateSlideText)
 
@@ -155,13 +179,11 @@ onMounted(() => {
     // Trigger initial progress animation
     const autoplay = emblaApi.value?.plugins()?.autoplay
     if (autoplay) {
-      // Small delay to ensure DOM is ready
       setTimeout(() => {
         autoplay.reset()
       }, 0)
     }
 
-    // Optional: Clean up event listeners when component is unmounted
     return () => {
       cleanupButtons()
       cleanupProgress()
@@ -237,6 +259,15 @@ onMounted(() => {
   --nav-link-border-hover: transparent;
 }
 
+@keyframes scale-down {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .homepage-embla-container {
   position: fixed;
   top: 0;
@@ -293,6 +324,11 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  will-change: transform;
+}
+
+.embla__slide.is-selected img {
+  animation: scale-down 6s linear forwards;
 }
 
 .embla__button {
