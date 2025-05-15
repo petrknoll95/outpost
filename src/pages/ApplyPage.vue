@@ -6,8 +6,8 @@ import Logo from '../components/MainLogo.vue';
 <template>
   <div class="apply_body w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
     <Header>
-      <div class="apply_title flex flex-col gap-14 min-h-[100%]">
-        <div class="max-w-[160px]">
+      <div class="apply_title flex flex-col gap-4 min-h-[100%]">
+        <div class="w-full max-w-[100%] md:max-w-[160px]">
         <Logo />
       </div>
         <h1 class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto max-w-[32ch]">
