@@ -46,8 +46,10 @@
 
 @layer tw.theme {
   :root {
-    --font-aeonik: 'Aeonik', sans-serif;
-    --font-aeonik-fono: 'Aeonik-Fono', sans-serif;
+    /* Define the font families with proper fallbacks */
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-aeonik: 'Aeonik', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-aeonik-fono: 'Aeonik-Fono', 'Aeonik', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 }
 
@@ -71,8 +73,17 @@
     padding: 0;
   }
 
+  /* These utility classes should use the CSS variables */
+  .font-aeonik {
+    font-family: var(--font-aeonik);
+  }
+  
   .font-aeonik-fono {
-    font-family: 'Aeonik-Fono', sans-serif;
+    font-family: var(--font-aeonik-fono);
+  }
+  
+  .font-sans {
+    font-family: var(--font-sans);
   }
 }
 

@@ -14,9 +14,7 @@ export default {
     theme: {
       extend: {
         fontFamily: {
-          'aeonik': ['Aeonik', 'sans-serif'],
-          'inter': ['Inter', 'sans-serif'],
-          'aeonik-fono': ['Aeonik-Fono', 'sans-serif'],
+          // These will now reference CSS variables defined in your theme layer
         },
       },
     },

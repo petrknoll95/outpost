@@ -4,7 +4,7 @@
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -59,16 +59,10 @@
 
   /* Headings */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Aeonik', sans-serif;
+    font-family: var(--font-aeonik);
   }
 
-  .font-aeonik {
-    font-family: 'Aeonik', sans-serif;
-  }
-
-  .font-aeonik-fono {
-    font-family: 'Aeonik-Fono', sans-serif;
-  }
+  /* Font utility classes moved to tw.utilities layer in style.css */
 
   /* Fluid Typography Scale */
   :root {
@@ -86,4 +80,4 @@
     --text-8xl: clamp(4rem, 3.082rem + 4.59vw, 7.21rem);
     --text-9xl: clamp(4rem, 3.082rem + 4.59vw, 7.21rem);
   }
-} 
+}
