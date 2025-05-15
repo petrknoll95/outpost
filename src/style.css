@@ -44,6 +44,13 @@
   }
 }
 
+@layer tw.theme {
+  :root {
+    --font-aeonik: 'Aeonik', sans-serif;
+    --font-aeonik-fono: 'Aeonik-Fono', sans-serif;
+  }
+}
+
 /* Global Page Transitions */
 .page-transition-enter-active,
 .page-transition-leave-active {
