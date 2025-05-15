@@ -11,7 +11,7 @@ import Logo from '../components/MainLogo.vue';
         <div class="w-full max-w-[100%] md:max-w-[160px]">
         <Logo />
       </div>
-        <h1 class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">You bring the hustle.
+        <h1 class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">You bring the hustle.
           <br />We'll bring the power outlets.
         </h1>
       </div>
@@ -19,10 +19,10 @@ import Logo from '../components/MainLogo.vue';
     <div class="membership_main flex flex-col pt-40 flex-grow justify-end items-stretch">
       <div class="membership_grid grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-16 items-stretch">
         <div class="membership_perks flex flex-col gap-6">
-          <p class="text-sm font-aeonik-fono uppercase tracking-[0.025em] font-medium">
+          <p class="text-sm !font-aeonik-fono uppercase tracking-[0.025em] font-medium">
             What's included
           </p>
-          <ul class="membership_perks_list text-4xl font-aeonik leading-[1em] tracking-[-0.025em]">
+          <ul class="membership_perks_list text-4xl !font-aeonik leading-[1em] tracking-[-0.025em]">
             <li>
               <img src="/images/icons/desk-office.svg" alt="Desk icon" class="benefit-icon" />
               <p>Your own fixed desk (no switching, ever)</p>
@@ -63,13 +63,13 @@ import Logo from '../components/MainLogo.vue';
         </div>
         <div class="membership_pricing flex flex-col gap-6">
 
-          <p class="text-sm font-aeonik-fono uppercase tracking-[0.025em] font-medium">
+          <p class="text-sm !font-aeonik-fono uppercase tracking-[0.025em] font-medium">
             Membership
           </p>
 
           <div class="membership_pricing-card text-timberwolf bg-raisin-black p-8 flex-grow flex flex-col justify-between items-stretch gap-12">
             <div class="flex flex-col gap-12">
-              <p class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em]">
+              <p class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em]">
                 $499/month. <br />That's it.
               </p>
               <div class="grid grid-cols-2 gap-8">
@@ -106,10 +106,6 @@ import Logo from '../components/MainLogo.vue';
     --nav-width: 100%;
     grid-template-columns: 1fr;
   }
-}
-
-.membership_body {
-  /* Removed background-color property as it's now handled by MainLayout */
 }
 
 .membership_perks ul {

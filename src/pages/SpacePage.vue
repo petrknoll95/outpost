@@ -82,7 +82,7 @@ const carouselSlides = [
         <div class="w-full max-w-[100%] md:max-w-[160px]">
         <Logo />
       </div>
-        <h1 class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">Designed for builders, thinkers, and people who show up.
+        <h1 class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">Designed for builders, thinkers, and people who show up.
         </h1>
       </div>
     </Header>

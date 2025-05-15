@@ -10,7 +10,7 @@ import Logo from '../components/MainLogo.vue';
         <div class="w-full max-w-[100%] md:max-w-[160px]">
         <Logo />
       </div>
-        <h1 class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">
+        <h1 class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">
           Goose Island. <br />Not just breweries anymore.
         </h1>
       </div>
