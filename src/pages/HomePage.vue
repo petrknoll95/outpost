@@ -111,15 +111,7 @@ onUnmounted(() => {
   }
 }
 
-.nav-header {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr fit-content(0px);
-  align-items: start;
-  gap: 2rem;
-}
-
-.main-logo {
+:deep(.logo_link) {
   color: var(--color-linen);
   justify-self: start;
   width: 100%;
@@ -129,18 +121,14 @@ onUnmounted(() => {
   height: 100%;
 }
 
-.main-logo-svg {
+:deep(.logo_svg) {
   contain: size;
   width: 100%;
   height: calc(123.5%);
 }
 
-@media only screen and (max-width: 64rem) { 
-  .nav-header {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .main-logo-svg {
+@media only screen and (max-width: 64rem) {
+  :deep(.logo_svg) {
     contain: none;
   }
 }

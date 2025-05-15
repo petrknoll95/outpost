@@ -20,12 +20,6 @@ import Nav from './MainNav.vue';
     row-gap: 2em;
 }
 
-@media only screen and (max-width: 48rem) { 
-    .header_container {
-        --nav-width: 320px;
-    }
-}
-
 @media only screen and (max-width: 40rem) { 
     .header_container {
         --nav-width: 100%;
