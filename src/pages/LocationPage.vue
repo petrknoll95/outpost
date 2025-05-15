@@ -37,7 +37,4 @@ import Logo from '../components/MainLogo.vue';
   }
 }
 
-.location_body {
-  background-color: var(--color-columbia-blue);
-}
 </style>

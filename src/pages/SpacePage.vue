@@ -130,10 +130,6 @@ const carouselSlides = [
   }
 }
 
-.space_body {
-  background-color: var(--color-timberwolf);
-}
-
 .space_perks ul {
   list-style-type: none;
   padding: 0;

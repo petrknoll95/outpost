@@ -28,7 +28,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="homepage-container bg-raisin-black">
+  <div class="homepage-container">
     <div class="embla body-home relative z-2 w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
       <Header>
         <Logo />

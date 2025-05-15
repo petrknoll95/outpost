@@ -43,7 +43,6 @@ import Logo from '../components/MainLogo.vue';
 }
 
 .apply_body {
-  background-color: var(--color-raisin-black);
   color: var(--color-linen);
 }
 </style>

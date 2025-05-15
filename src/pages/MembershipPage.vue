@@ -109,7 +109,7 @@ import Logo from '../components/MainLogo.vue';
 }
 
 .membership_body {
-  background-color: var(--color-timberwolf);
+  /* Removed background-color property as it's now handled by MainLayout */
 }
 
 .membership_perks ul {

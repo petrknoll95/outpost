@@ -44,6 +44,18 @@
   }
 }
 
+/* Global Page Transitions */
+.page-transition-enter-active,
+.page-transition-leave-active {
+  transition: opacity 0.4s ease;
+  will-change: opacity;
+}
+
+.page-transition-enter-from,
+.page-transition-leave-to {
+  opacity: 0;
+}
+
 /* Custom utilities */
 @layer tw.utilities {
   #app {
