@@ -62,6 +62,14 @@
     font-family: 'Aeonik', sans-serif;
   }
 
+  .font-aeonik {
+    font-family: 'Aeonik', sans-serif;
+  }
+
+  .font-aeonik-fono {
+    font-family: 'Aeonik Fono', sans-serif;
+  }
+
   /* Fluid Typography Scale */
   :root {
     --text-xs: clamp(0.875rem, 0.875rem + 0vw, 0.875rem);

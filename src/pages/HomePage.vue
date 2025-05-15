@@ -1,249 +1,38 @@
 <script setup>
-import HomepageNav from '../components/HomepageNav.vue';
-import { onMounted, onUnmounted, ref } from 'vue'
-import emblaCarouselVue from 'embla-carousel-vue'
-import Autoplay from 'embla-carousel-autoplay'
-import Fade from 'embla-carousel-fade'
-import AutoHeight from 'embla-carousel-auto-height';
+import Header from '../components/MainHeader.vue';
+import Logo from '../components/MainLogo.vue';
+import { onMounted, onUnmounted } from 'vue'
+import { useEmblaCarousel } from '../scripts/useEmblaCarousel.js'
 
-const [emblaRef, emblaApi] = emblaCarouselVue({ loop: true }, [
-  Autoplay({ delay: 6000, stopOnInteraction: false }), 
-  Fade(),
-  AutoHeight()
-])
-const prevBtn = ref(null)
-const nextBtn = ref(null)
-const progressNode = ref(null)
-const slideTextNode = ref(null)
+const {
+  emblaRef,
+  emblaApi,
+  prevBtn,
+  nextBtn,
+  progressNode,
+  slideTextNode,
+  setupCarousel
+} = useEmblaCarousel()
 
-const slideNames = [
-  'Common Space',
-  'Meeting Room',
-  'Phone Booth',
-  'Kitchen Area'
-]
-
-const updateSlideText = () => {
-  if (emblaApi.value && slideTextNode.value) {
-    const currentIndex = emblaApi.value.selectedScrollSnap()
-    slideTextNode.value.textContent = slideNames[currentIndex]
-  }
-}
-
-const addTogglePrevNextBtnsActive = (emblaApi, prevBtn, nextBtn) => {
-  const togglePrevNextBtnsState = () => {
-    if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
-    else prevBtn.setAttribute('disabled', 'disabled')
-
-    if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
-    else nextBtn.setAttribute('disabled', 'disabled')
-  }
-
-  emblaApi
-    .on('select', togglePrevNextBtnsState)
-    .on('init', togglePrevNextBtnsState)
-    .on('reInit', togglePrevNextBtnsState)
-
-  return () => {
-    prevBtn.removeAttribute('disabled')
-    nextBtn.removeAttribute('disabled')
-  }
-}
-
-const addPrevNextBtnsClickHandlers = (emblaApi, prevBtn, nextBtn) => {
-  const scrollPrev = () => {
-    emblaApi.scrollPrev()
-    const autoplay = emblaApi?.plugins()?.autoplay
-    if (autoplay) {
-      autoplay.reset()
-    }
-    updateSlideText()
-  }
-  const scrollNext = () => {
-    emblaApi.scrollNext()
-    const autoplay = emblaApi?.plugins()?.autoplay
-    if (autoplay) {
-      autoplay.reset()
-    }
-    updateSlideText()
-  }
-  prevBtn.addEventListener('click', scrollPrev, false)
-  nextBtn.addEventListener('click', scrollNext, false)
-
-  const removeTogglePrevNextBtnsActive = addTogglePrevNextBtnsActive(
-    emblaApi,
-    prevBtn,
-    nextBtn
-  )
-
-  return () => {
-    removeTogglePrevNextBtnsActive()
-    prevBtn.removeEventListener('click', scrollPrev, false)
-    nextBtn.removeEventListener('click', scrollNext, false)
-  }
-}
-
-const addAutoplayProgressListeners = (emblaApi, progressNode) => {
-  const progressBarNode = progressNode.querySelector('.embla__progress__bar')
-
-  let animationName = ''
-  let timeoutId = 0
-  let rafId = 0
-
-  const startProgress = (emblaApi) => {
-    const autoplay = emblaApi?.plugins()?.autoplay
-    if (!autoplay) return
-
-    const timeUntilNext = autoplay.timeUntilNext()
-    if (timeUntilNext === null) return
-
-    if (!animationName) {
-      const style = window.getComputedStyle(progressBarNode)
-      animationName = style.animationName
-    }
-
-    progressBarNode.style.animationName = 'none'
-    progressBarNode.style.transform = 'translate3d(0,0,0)'
-
-    rafId = window.requestAnimationFrame(() => {
-      timeoutId = window.setTimeout(() => {
-        progressBarNode.style.animationName = animationName
-        progressBarNode.style.animationDuration = `${timeUntilNext}ms`
-      }, 0)
-    })
-
-    progressNode.classList.remove('embla__progress--hidden')
-  }
-
-  const stopProgress = (emblaApi) => {
-    const autoplay = emblaApi?.plugins()?.autoplay
-    if (!autoplay) return
-
-    progressNode.classList.add('embla__progress--hidden')
-  }
-
-  emblaApi
-    .on('autoplay:timerset', startProgress)
-    .on('autoplay:timerstopped', stopProgress)
-
-  return () => {
-    emblaApi
-      .off('autoplay:timerset', startProgress)
-      .off('autoplay:timerstopped', stopProgress)
-  }
-}
-
-const addScaleAnimation = (emblaApi) => {
-  const scaleNodes = emblaApi.slideNodes().map(slide => slide.querySelector('img'))
-  
-  const startScale = () => {
-    const autoplay = emblaApi?.plugins()?.autoplay
-    if (!autoplay) return
-
-    const timeUntilNext = autoplay.timeUntilNext()
-    if (timeUntilNext === null) return
-
-    const selectedSlide = emblaApi.selectedScrollSnap()
-    const selectedNode = scaleNodes[selectedSlide]
-    
-    if (selectedNode) {
-      selectedNode.style.transition = 'none'
-      selectedNode.style.transform = 'scale(1.05)'
-      
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          selectedNode.style.transition = `transform ${timeUntilNext}ms linear`
-          selectedNode.style.transform = 'scale(1)'
-        }, 0)
-      })
-    }
-  }
-
-  const stopScale = () => {
-    scaleNodes.forEach(node => {
-      if (node) {
-        node.style.transition = 'none'
-        node.style.transform = 'scale(1.05)'
-      }
-    })
-  }
-
-  emblaApi
-    .on('autoplay:timerset', startScale)
-    .on('autoplay:timerstopped', stopScale)
-    .on('select', startScale)
-
-  return () => {
-    emblaApi
-      .off('autoplay:timerset', startScale)
-      .off('autoplay:timerstopped', stopScale)
-      .off('select', startScale)
-  }
-}
-
-// Debounce function to limit resize handler calls
-const debounce = (fn, delay) => {
-  let timeoutId
-  return (...args) => {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(...args), delay)
-  }
-}
-
-// Handle window resize
-const handleResize = debounce(() => {
-  if (emblaApi.value) {
-    emblaApi.value.reInit()
-  }
-}, 250)
+let cleanup = null
 
 onMounted(() => {
-  if (emblaApi.value) {
-    console.log(emblaApi.value.slideNodes()) // Access API
-    const cleanupButtons = addPrevNextBtnsClickHandlers(
-      emblaApi.value,
-      prevBtn.value,
-      nextBtn.value
-    )
-    const cleanupProgress = addAutoplayProgressListeners(
-      emblaApi.value,
-      progressNode.value
-    )
+  cleanup = setupCarousel()
+})
 
-    // Add scale animation
-    addScaleAnimation(emblaApi.value)
-
-    // Add select listener for autoplay slide changes
-    emblaApi.value.on('select', updateSlideText)
-
-    // Set initial slide text
-    updateSlideText()
-
-    // Trigger initial progress animation
-    const autoplay = emblaApi.value?.plugins()?.autoplay
-    if (autoplay) {
-      setTimeout(() => {
-        autoplay.reset()
-      }, 0)
-    }
-
-    // Add resize event listener
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      cleanupButtons()
-      cleanupProgress()
-      emblaApi.value.off('select', updateSlideText)
-      window.removeEventListener('resize', handleResize)
-    }
+onUnmounted(() => {
+  if (cleanup) {
+    cleanup()
   }
 })
 </script>
 
 <template>
   <div class="homepage-container bg-raisin-black">
-    <div class="embla homepage-body relative z-2 w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
-      <HomepageNav />
+    <div class="embla body-home relative z-2 w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
+      <Header>
+        <Logo />
+      </Header>
       <div class="flex flex-col gap-8 lg:grid lg:grid-cols-4 flex-grow ">
       <div class="flex flex-col flex-grow gap-12 items-start justify-end text-linen pt-12 lg:pt-48 lg:col-span-3">
         <h1 class="text-8xl leading-[0.875em] tracking-[-0.025em] text-balance max-w-[18ch]">Small. Quiet. <br />Built for people who
@@ -299,6 +88,20 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* STYLE OVERRIDES */
+:deep(.header_container .nav-wrap) {
+  --nav-link-bg: transparent;
+  --nav-link-border: var(--color-linen);
+  --nav-link-text: var(--color-linen);
+  --nav-link-bg-hover: var(--color-linen);
+  --nav-link-text-hover: var(--color-raisin-black);
+  --nav-link-border-hover: transparent;
+}
+
+:deep(.header_container .logo_link) {
+  color: var(--color-linen);
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -308,13 +111,38 @@ onMounted(() => {
   }
 }
 
-.homepage-body {
-  --nav-link-bg: transparent;
-  --nav-link-border: var(--color-linen);
-  --nav-link-text: var(--color-linen);
-  --nav-link-bg-hover: var(--color-linen);
-  --nav-link-text-hover: var(--color-raisin-black);
-  --nav-link-border-hover: transparent;
+.nav-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr fit-content(0px);
+  align-items: start;
+  gap: 2rem;
+}
+
+.main-logo {
+  color: var(--color-linen);
+  justify-self: start;
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  height: 100%;
+}
+
+.main-logo-svg {
+  contain: size;
+  width: 100%;
+  height: calc(123.5%);
+}
+
+@media only screen and (max-width: 64rem) { 
+  .nav-header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .main-logo-svg {
+    contain: none;
+  }
 }
 
 .embla__viewport {
