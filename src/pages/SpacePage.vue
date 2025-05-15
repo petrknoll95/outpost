@@ -16,7 +16,7 @@ const isMobile = ref(false);
 const checkMobile = () => {
   const wasMobile = isMobile.value;
   isMobile.value = window.innerWidth < 768;
-  
+
   // Handle transition from mobile to desktop
   if (wasMobile && !isMobile.value) {
     // Need to reinitialize carousel
@@ -24,13 +24,13 @@ const checkMobile = () => {
       cleanup();
       cleanup = null;
     }
-    
+
     // Use setTimeout to ensure DOM is updated before initializing
     setTimeout(() => {
       cleanup = setupCarousel();
     }, 50);
   }
-  
+
   // Handle transition from desktop to mobile
   if (!wasMobile && isMobile.value) {
     if (cleanup) {
@@ -58,19 +58,38 @@ onUnmounted(() => {
 const carouselSlides = [
   {
     image: '/images/carousel/space-slider-01.webp',
-    description: 'Dedicated workspaces for focused productivity'
+    bullet: 'images/svg-num/svg-num-01.svg',
+    description: 'Lounge area'
   },
   {
     image: '/images/carousel/space-slider-02.webp',
-    description: 'Collaborative meeting areas for team discussions'
+    bullet: 'images/svg-num/svg-num-02.svg',
+    description: 'Kitchenette'
+  },
+  {
+    image: '/images/carousel/space-slider-06.webp',
+    bullet: 'images/svg-num/svg-num-03.svg',
+    description: 'Oak & Concrete'
   },
   {
     image: '/images/carousel/space-slider-03.webp',
-    description: 'Comfortable lounge spaces for breaks and casual work'
+    bullet: 'images/svg-num/svg-num-04.svg',
+    description: 'Open space work area'
   },
   {
     image: '/images/carousel/space-slider-04.webp',
-    description: 'Modern amenities to support your workday'
+    bullet: 'images/svg-num/svg-num-05.svg',
+    description: 'Plants you don\'t have to water'
+  },
+  {
+    image: '/images/carousel/space-slider-05.webp',
+    bullet: 'images/svg-num/svg-num-06.svg',
+    description: 'Kitchenette'
+  },
+  {
+    image: '/images/carousel/space-slider-07.webp',
+    bullet: 'images/svg-num/svg-num-07.svg',
+    description: 'Lounge area'
   }
 ];
 </script>
@@ -80,9 +99,10 @@ const carouselSlides = [
     <Header>
       <div class="space_title flex flex-col gap-4 min-h-[100%]">
         <div class="w-full max-w-[100%] md:max-w-[160px]">
-        <Logo />
-      </div>
-        <h1 class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">Designed for builders, thinkers, and people who show up.
+          <Logo />
+        </div>
+        <h1 class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto max-w-[24ch]">Designed
+          for builders, thinkers, and people who show up.
         </h1>
       </div>
     </Header>
@@ -95,21 +115,27 @@ const carouselSlides = [
               <div class="slide-content">
                 <img :src="slide.image" :alt="slide.description" class="slide-image">
                 <div class="slide-description">
-                  <p>{{ slide.description }}</p>
+                  <div class="flex flex-row gap-3 items-center">
+                    <img :src="slide.bullet" :alt="slide.description" class="slide-bullet">
+                    <p class="text-sm font-aeonik-fono mt-[-0.075em]">{{ slide.description }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Mobile Vertical Layout -->
       <div v-else class="mobile-images">
         <div class="mobile-slide" v-for="slide in carouselSlides" :key="slide.image">
           <div class="slide-content">
             <img :src="slide.image" :alt="slide.description" class="slide-image">
             <div class="slide-description">
-              <p>{{ slide.description }}</p>
+              <div class="flex flex-row gap-3 items-center">
+                <img :src="slide.bullet" :alt="slide.description" class="slide-bullet">
+                <p class="text-sm font-aeonik-fono mt-[-0.075em]">{{ slide.description }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -190,8 +216,17 @@ const carouselSlides = [
   display: flex;
   align-items: stretch;
   margin-right: 2em;
+
   @media (min-width: 768px) {
     flex: 0 0 50%;
+  }
+
+  @media (min-width: 1024px) {
+    flex: 0 0 40%;
+  }
+
+  @media (min-width: 1280px) {
+    flex: 0 0 30%;
   }
 }
 
@@ -231,7 +266,7 @@ const carouselSlides = [
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   padding: 2em;
   color: var(--color-linen);
   font-family: 'Aeonik', sans-serif;
