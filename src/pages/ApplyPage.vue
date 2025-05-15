@@ -1,8 +1,49 @@
 <script setup>
+import Header from '../components/MainHeader.vue';
+import Logo from '../components/MainLogo.vue';
 </script>
 
 <template>
-  <div class="w-full py-8 px-8">
-    <p class="text-lg font-inter">Application form will go here.</p>
+  <div class="apply_body w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
+    <Header>
+      <div class="apply_title flex flex-col gap-14 min-h-[100%]">
+        <div class="max-w-[160px]">
+        <Logo />
+      </div>
+        <h1 class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto max-w-[32ch]">
+          If you're just looking for Wifi, this probably isn't for you.
+        </h1>
+      </div>
+    </Header>
+    <div class="apply_main flex flex-col pt-32 flex-grow justify-end items-stretch">
+      
+    </div>
   </div>
-</template> 
+</template>
+
+<style scoped>
+:deep(.logo_link) {
+  color: var(--color-linen);
+}
+
+:deep(.nav-wrap) {
+  --nav-link-text: var(--color-linen);
+  --nav-link-text-hover: var(--color-raisin-black);
+  --nav-link-border: var(--color-linen);
+  --nav-link-border-hover: var(--color-linen);
+  --nav-link-bg: transparent;
+  --nav-link-bg-hover: var(--color-linen);
+}
+
+:deep(.header_container) {
+  @media only screen and (max-width: 64rem) {
+    --nav-width: 100%;
+    grid-template-columns: 1fr;
+  }
+}
+
+.apply_body {
+  background-color: var(--color-raisin-black);
+  color: var(--color-linen);
+}
+</style>
