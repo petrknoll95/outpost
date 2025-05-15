@@ -95,13 +95,13 @@ const carouselSlides = [
 </script>
 
 <template>
-  <div class="space_body w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
+  <div class="space_body w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col text-raisin-black">
     <Header>
       <div class="space_title flex flex-col gap-4 min-h-[100%]">
         <div class="w-full max-w-[100%] md:max-w-[160px]">
           <Logo />
         </div>
-        <h1 class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto max-w-[24ch]">Designed
+        <h1 class="text-5xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto max-w-[24ch]">Designed
           for builders, thinkers, and people who show up.
         </h1>
       </div>

@@ -1,6 +1,7 @@
 <script setup>
 import Header from '../components/MainHeader.vue';
 import Logo from '../components/MainLogo.vue';
+import ApplyForm from '../components/ApplyForm.vue';
 </script>
 
 <template>
@@ -10,14 +11,26 @@ import Logo from '../components/MainLogo.vue';
         <div class="w-full max-w-[100%] md:max-w-[160px]">
         <Logo />
       </div>
-        <h1 class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto max-w-[32ch]">
+        <h1 class="text-5xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto max-w-[32ch]">
           If you're just looking for Wifi, this probably isn't for you.
         </h1>
       </div>
     </Header>
-    <div class="apply_main flex flex-col pt-32 flex-grow justify-end items-stretch">
-      
+    <div class="flex flex-col flex-grow pt-32 items-stretch justify-end">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16 pt-16 border-t-[1px] border-linen">
+      <div class="col-span-1 lg:col-span-1 flex flex-col gap-8 max-w-[40ch]">
+        <h2 class="text-4xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance">
+          This isn’t a waitlist. <br />It’s a filter.
+        </h2>
+        <p class="text-lg text-balance opacity-50">
+          We’ll be in touch within a few days. If it’s a fit, we’ll schedule a quick call or in-person visit.
+        </p>
+      </div>
+      <div class="col-span-2 lg:col-span-2">
+        <ApplyForm />
+      </div>
     </div>
+  </div>
   </div>
 </template>
 

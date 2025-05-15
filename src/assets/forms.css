@@ -1,0 +1,94 @@
+/* Common form field styles */
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.form-field-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bullet-container {
+  flex-shrink: 0;
+}
+
+.bullet-svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.field-label {
+  font-family: var(--font-aeonik-fono);
+  text-transform: uppercase;
+  font-size: 0.875em;
+  line-height: 1em;
+  letter-spacing: 0.025em;
+  color: var(--color-linen);
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.field-description {
+  font-size: 0.875rem;
+  color: color-mix(in srgb, var(--color-linen) 50%, transparent);
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+}
+
+.required-indicator {
+  color: #E53E3E;
+}
+
+.form-field-wrapper {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-linen) 20%, transparent);
+  border-radius: 0;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.form-field-wrapper:focus-within {
+  box-shadow: inset 0 0 0 1px var(--color-linen);
+}
+
+.form-field-error {
+  border-color: #E53E3E;
+}
+
+.form-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-aeonik);
+  font-size: 1rem;
+  color: var(--color-linen);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.form-field::placeholder {
+  color: color-mix(in srgb, var(--color-linen) 50%, transparent);
+}
+
+.error-message {
+  font-size: 0.875rem;
+  color: #E53E3E;
+}
+
+/* Textarea specific styles */
+.textarea-field {
+  resize: vertical;
+  min-height: 120px;
+}
