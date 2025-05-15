@@ -45,8 +45,7 @@
 }
 
 @layer tw.theme {
-  :root {
-    /* Define the font families with proper fallbacks */
+  @theme {
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --font-aeonik: 'Aeonik', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --font-aeonik-fono: 'Aeonik-Fono', 'Aeonik', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;

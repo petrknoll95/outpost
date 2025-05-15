@@ -11,12 +11,5 @@ export default {
       components: {},
       utilities: {},
     },
-    theme: {
-      extend: {
-        fontFamily: {
-          // These will now reference CSS variables defined in your theme layer
-        },
-      },
-    },
     plugins: [],
   };

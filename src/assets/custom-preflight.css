@@ -65,7 +65,7 @@
   /* Font utility classes moved to tw.utilities layer in style.css */
 
   /* Fluid Typography Scale */
-  :root {
+  @theme {
     --text-xs: clamp(0.875rem, 0.875rem + 0vw, 0.875rem);
     --text-sm: clamp(0.875rem, 0.875rem + 0vw, 0.875rem);
     --text-base: clamp(1rem, 0.986rem + 0.07vw, 1.05rem);
