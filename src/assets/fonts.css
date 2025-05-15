@@ -1,10 +1,10 @@
 /* Inter Font - Using existing CSS file */
-@import '../assets/inter/inter.css';
+@import './inter/inter.css';
 
 /* Aeonik Font - Regular weight only */
 @font-face {
   font-family: 'Aeonik';
-  src: url('../assets/aeonik/Aeonik-Regular.woff2') format('woff2');
+  src: url('./aeonik/Aeonik-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'Aeonik';
-  src: url('../assets/aeonik/Aeonik-RegularItalic.woff2') format('woff2');
+  src: url('./aeonik/Aeonik-RegularItalic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -21,7 +21,7 @@
 /* Fix the font-family name to be consistent with CSS references */
 @font-face {
   font-family: 'Aeonik-Fono';
-  src: url('../assets/aeonik-fono/AeonikFono-Regular.otf') format('opentype');
+  src: url('./assets/aeonik-fono/AeonikFono-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap; /* Change to swap for better mobile performance */
@@ -29,7 +29,7 @@
 
 @font-face {
   font-family: 'Aeonik-Fono';
-  src: url('../assets/aeonik-fono/AeonikFono-Medium.otf') format('opentype');
+  src: url('./aeonik-fono/AeonikFono-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap; /* Change to swap for better mobile performance */
@@ -38,7 +38,7 @@
 /* Add additional weights for Aeonik */
 @font-face {
   font-family: 'Aeonik';
-  src: url('../assets/aeonik/Aeonik-Medium.woff2') format('woff2');
+  src: url('./aeonik/Aeonik-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -46,7 +46,7 @@
 
 @font-face {
   font-family: 'Aeonik';
-  src: url('../assets/aeonik/Aeonik-Bold.woff2') format('woff2');
+  src: url('./aeonik/Aeonik-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
