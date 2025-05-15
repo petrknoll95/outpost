@@ -17,7 +17,7 @@ import Nav from './MainNav.vue';
     align-items: start;
     justify-content: space-between;
     column-gap: 5%;
-    row-gap: 1em;
+    row-gap: 2em;
 }
 
 @media only screen and (max-width: 48rem) { 

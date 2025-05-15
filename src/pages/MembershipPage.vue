@@ -1,18 +1,22 @@
 <script setup>
 import Header from '../components/MainHeader.vue';
 import MainButton from '../components/MainButton.vue';
+import Logo from '../components/MainLogo.vue';
 </script>
 
 <template>
-  <div class="membership_body w-full min-h-screen py-8 px-8 flex flex-col">
+  <div class="membership_body w-full min-h-screen px-4 py-4 md:px-8 md:py-8 flex flex-col">
     <Header>
-      <div class="membership_title">
-        <h1 class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em] text-balance">You bring the hustle.
+      <div class="membership_title flex flex-col gap-14 min-h-[100%]">
+        <div class="max-w-[160px]">
+        <Logo />
+      </div>
+        <h1 class="text-6xl font-aeonik leading-[1em] tracking-[-0.025em] text-balance mt-auto">You bring the hustle.
           <br />We'll bring the power outlets.
         </h1>
       </div>
     </Header>
-    <div class="membership_main flex flex-col pt-12 flex-grow justify-end items-stretch">
+    <div class="membership_main flex flex-col pt-40 flex-grow justify-end items-stretch">
       <div class="membership_grid grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-16 items-stretch">
         <div class="membership_perks flex flex-col gap-6">
           <p class="text-sm font-aeonik-fono uppercase tracking-[0.025em] font-medium">
@@ -93,6 +97,17 @@ import MainButton from '../components/MainButton.vue';
 </template>
 
 <style scoped>
+:deep(.logo_link) {
+  color: var(--color-raisin-black);
+}
+
+:deep(.header_container) {
+  @media only screen and (max-width: 64rem) {
+    --nav-width: 100%;
+    grid-template-columns: 1fr;
+  }
+}
+
 .membership_body {
   background-color: var(--color-timberwolf);
 }
