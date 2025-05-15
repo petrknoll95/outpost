@@ -87,4 +87,63 @@ const router = createRouter({
   }
 })
 
+// Update page title and meta tags
+router.beforeEach((to, from, next) => {
+  // Update page title
+  if (to.meta && to.meta.title) {
+    document.title = to.meta.title
+  }
+  
+  // Update meta tags
+  const metaTags = document.getElementsByTagName('meta')
+  
+  // Update description
+  if (to.meta && to.meta.description) {
+    const descriptionTag = Array.from(metaTags).find(tag => tag.name === 'description')
+    if (descriptionTag) {
+      descriptionTag.content = to.meta.description
+    }
+  }
+  
+  // Update keywords
+  if (to.meta && to.meta.keywords) {
+    const keywordsTag = Array.from(metaTags).find(tag => tag.name === 'keywords')
+    if (keywordsTag) {
+      keywordsTag.content = to.meta.keywords
+    }
+  }
+  
+  // Update Open Graph tags
+  if (to.meta && to.meta.ogTitle) {
+    const ogTitleTag = Array.from(metaTags).find(tag => tag.getAttribute('property') === 'og:title')
+    if (ogTitleTag) {
+      ogTitleTag.content = to.meta.ogTitle
+    }
+  }
+  
+  if (to.meta && to.meta.ogDescription) {
+    const ogDescTag = Array.from(metaTags).find(tag => tag.getAttribute('property') === 'og:description')
+    if (ogDescTag) {
+      ogDescTag.content = to.meta.ogDescription
+    }
+  }
+  
+  // Twitter tags
+  if (to.meta && to.meta.ogTitle) {
+    const twitterTitleTag = Array.from(metaTags).find(tag => tag.name === 'twitter:title')
+    if (twitterTitleTag) {
+      twitterTitleTag.content = to.meta.ogTitle
+    }
+  }
+  
+  if (to.meta && to.meta.ogDescription) {
+    const twitterDescTag = Array.from(metaTags).find(tag => tag.name === 'twitter:description')
+    if (twitterDescTag) {
+      twitterDescTag.content = to.meta.ogDescription
+    }
+  }
+  
+  next()
+})
+
 export default router 

@@ -2,31 +2,9 @@
 import MainLayout from './layouts/MainLayout.vue'
 import { useRoute } from 'vue-router'
 import { computed, watch } from 'vue'
-import { useMeta } from 'vue-meta'
 
 const route = useRoute()
 const transitionName = computed(() => 'page-transition')
-
-// Setup meta tags
-useMeta({
-  title: computed(() => route.meta.title || 'OUTPOST - A workspace for people who actually work'),
-  meta: computed(() => {
-    if (!route.meta) return []
-    
-    return [
-      { name: 'description', content: route.meta.description },
-      { name: 'keywords', content: route.meta.keywords },
-      { property: 'og:title', content: route.meta.ogTitle },
-      { property: 'og:description', content: route.meta.ogDescription },
-      { property: 'og:image', content: route.meta.ogImage },
-      { property: 'og:type', content: 'website' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: route.meta.ogTitle },
-      { name: 'twitter:description', content: route.meta.ogDescription },
-      { name: 'twitter:image', content: route.meta.ogImage }
-    ].filter(meta => meta.content) // Filter out undefined meta values
-  })
-})
 </script>
 
 <template>
