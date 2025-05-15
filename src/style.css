@@ -74,15 +74,15 @@
 
   /* These utility classes should use the CSS variables */
   .font-aeonik {
-    font-family: var(--font-aeonik);
+    font-family: var(--font-aeonik) !important;
   }
   
   .font-aeonik-fono {
-    font-family: var(--font-aeonik-fono);
+    font-family: var(--font-aeonik-fono) !important;
   }
   
   .font-sans {
-    font-family: var(--font-sans);
+    font-family: var(--font-sans) !important;
   }
 }
 
