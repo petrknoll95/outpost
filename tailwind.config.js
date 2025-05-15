@@ -16,6 +16,7 @@ export default {
         fontFamily: {
           'aeonik': ['Aeonik', 'sans-serif'],
           'inter': ['Inter', 'sans-serif'],
+          'aeonik-fono': ['Aeonik Fono', 'sans-serif'],
         },
       },
     },
