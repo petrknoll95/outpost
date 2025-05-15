@@ -69,13 +69,13 @@ onUnmounted(() => {
   <div class="homepage-embla-container">
     <div class="embla__viewport w-full h-full absolute top-0 left-0 z-0" ref="emblaRef">
       <div class="embla__container w-full h-full absolute top-0 left-0">
-        <div class="embla__slide home-embla-slide" data-slide-name="Common Space">
+        <div class="embla__slide home-embla-slide" data-slide-name="Open Workspace">
           <img src="/images/homepage/home-bg-03.webp" alt="Common Space" class="w-full h-full object-cover" />
         </div>
-        <div class="embla__slide home-embla-slide" data-slide-name="Meeting Room">
+        <div class="embla__slide home-embla-slide" data-slide-name="Kitchenette with dining area">
           <img src="/images/homepage/home-bg-02.webp" alt="Meeting Room" class="w-full h-full object-cover" />
         </div>
-        <div class="embla__slide home-embla-slide" data-slide-name="Phone Booth">
+        <div class="embla__slide home-embla-slide" data-slide-name="Lounge area">
           <img src="/images/homepage/home-bg-01.webp" alt="Phone Booth" class="w-full h-full object-cover" />
         </div>
       </div>
