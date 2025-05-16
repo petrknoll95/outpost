@@ -20,10 +20,10 @@ import ApplyForm from '../components/ApplyForm.vue';
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16 pt-16 border-t-[1px] border-linen">
       <div class="col-span-1 lg:col-span-1 flex flex-col gap-8 max-w-[40ch]">
         <h2 class="text-4xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance">
-          This isn’t a waitlist. <br />It’s a filter.
+          This isn't a waitlist. <br />It's a filter.
         </h2>
         <p class="text-lg text-balance opacity-50">
-          We’ll be in touch within a few days. If it’s a fit, we’ll schedule a quick call or in-person visit.
+          We'll be in touch within a few days. If it's a fit, we'll schedule a quick call or in-person visit.
         </p>
       </div>
       <div class="col-span-2 lg:col-span-2">

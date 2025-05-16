@@ -15,6 +15,11 @@ const frequencyAnswer = ref('');
 const startDateAnswer = ref('');
 const socialAnswer = ref('');
 
+// Add these refs for UI state handling
+const isSubmitting = ref(false);
+const showSuccessMessage = ref(false);
+const showErrorMessage = ref(false);
+
 const formErrors = ref({
   nameAnswer: '',
   emailAnswer: '',
@@ -69,7 +74,17 @@ const validateForm = () => {
   return isFormValid.value;
 };
 
-const submitForm = () => {
+const resetForm = () => {
+  nameAnswer.value = '';
+  emailAnswer.value = '';
+  workAnswer.value = '';
+  whyAnswer.value = '';
+  frequencyAnswer.value = '';
+  startDateAnswer.value = '';
+  socialAnswer.value = '';
+};
+
+const submitForm = async () => {
   if (validateForm()) {
     const formData = {
       name: nameAnswer.value,
@@ -81,26 +96,33 @@ const submitForm = () => {
       social: socialAnswer.value
     };
     
-    console.log('Form submitted:', formData);
+    // Show loading state
+    isSubmitting.value = true;
     
-    // Here you would typically send the data to your server
-    // For example:
-    // fetch('/api/apply', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   console.log('Success:', data);
-    // })
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // });
-    
-    alert('Application submitted successfully!');
+    try {
+      const response = await fetch('/api/handle-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      // Reset form
+      resetForm();
+      
+      // Show success message
+      showSuccessMessage.value = true;
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      showErrorMessage.value = true;
+    } finally {
+      isSubmitting.value = false;
+    }
   } else {
     console.log('Form has errors, cannot submit');
   }
@@ -110,7 +132,17 @@ const submitForm = () => {
 <template>
   <div class="apply-form">
     <form @submit.prevent="submitForm" class="form-container" novalidate>
-      <div class="form-grid">
+      <div v-if="showSuccessMessage" class="success-message">
+        <h3>Application Submitted!</h3>
+        <p>Thanks for applying to Outpost. We'll be in touch soon!</p>
+      </div>
+      
+      <div v-if="showErrorMessage" class="error-message">
+        <h3>Oops! Something went wrong.</h3>
+        <p>Please try again or contact us directly.</p>
+      </div>
+      
+      <div v-if="!showSuccessMessage" class="form-grid">
         <!-- Left Column -->
         <div class="form-column">
           <InputField
@@ -177,8 +209,8 @@ const submitForm = () => {
           />
           
           <div class="submit-button-container">
-            <button type="submit" class="submit-button">
-              Apply for Membership
+            <button type="submit" class="submit-button" :disabled="isSubmitting">
+              {{ isSubmitting ? 'Submitting...' : 'Apply for Membership' }}
             </button>
           </div>
         </div>
@@ -188,7 +220,6 @@ const submitForm = () => {
 </template>
 
 <style scoped>
-
 .form-container {
   width: 100%;
 }
@@ -278,5 +309,30 @@ const submitForm = () => {
 
 .submit-button:focus {
   outline: none;
+}
+
+.success-message, .error-message {
+  background-color: color-mix(in srgb, var(--color-linen) 10%, transparent);
+  border: 1px solid var(--color-linen);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.success-message h3 {
+  color: var(--color-linen);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-message h3 {
+  color: #E53E3E;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 </style>
