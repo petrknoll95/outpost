@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from './layouts/MainLayout.vue'
 import { useRoute } from 'vue-router'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 
 const route = useRoute()
 const transitionName = computed(() => 'page-transition')
@@ -9,12 +9,14 @@ const transitionName = computed(() => 'page-transition')
 
 <template>
   <MainLayout>
-    <transition 
-      :name="transitionName" 
-      mode="out-in"
-      appear>
-      <router-view :key="route.path" />
-    </transition>
+    <router-view v-slot="{ Component }">
+      <transition 
+        :name="transitionName" 
+        mode="out-in"
+        appear>
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view>
   </MainLayout>
 </template>
 

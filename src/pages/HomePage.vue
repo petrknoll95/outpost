@@ -157,13 +157,19 @@ onUnmounted(() => {
   content: "";
   display: block;
   width: 100%;
-  height: 33.33%;
+  height: 100%;
   background-image:
-    linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+    linear-gradient(to top, rgba(41, 37, 34, 0) 25%, rgba(41, 37, 34, 0.5));
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+@media only screen and (max-width: 32rem) {
+  .homepage-embla-container:after {
+    background-image: linear-gradient(to top, rgba(41, 37, 34, 0) 0%, rgba(41, 37, 34, 0.75));
+  }
 }
 
 .homepage-embla-container:before {

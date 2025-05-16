@@ -117,7 +117,7 @@ const submitForm = () => {
             label="FULL NAME"
             v-model="nameAnswer"
             placeholder=""
-            bulletNumber="1"
+            :bulletNumber="1"
             required
             :error="formErrors.nameAnswer"
           />
@@ -127,7 +127,7 @@ const submitForm = () => {
             placeholder=""
             type="email"
             v-model="emailAnswer"
-            bulletNumber="2"
+            :bulletNumber="2"
             required
             :error="formErrors.emailAnswer"
           />
@@ -137,7 +137,7 @@ const submitForm = () => {
             description="Short and sweet—just give us the gist."
             placeholder=""
             v-model="workAnswer"
-            bulletNumber="3"
+            :bulletNumber="3"
           />
           
           <TextAreaField
@@ -145,8 +145,8 @@ const submitForm = () => {
             description="This isn't a pitch. Just tell us what you're looking for in a workspace."
             placeholder=""
             v-model="whyAnswer"
-            bulletNumber="4"
-            rows="8"
+            :bulletNumber="4"
+            :rows="8"
           />
         </div>
         
@@ -156,7 +156,7 @@ const submitForm = () => {
             label="HOW OFTEN DO YOU EXPECT TO USE YOUR DESK?"
             v-model="frequencyAnswer"
             :options="frequencyOptions"
-            bulletNumber="5"
+            :bulletNumber="5"
             required
             :error="formErrors.frequencyAnswer"
           />
@@ -165,7 +165,7 @@ const submitForm = () => {
             label="WHEN WOULD YOU WANT TO START?"
             placeholder=""
             v-model="startDateAnswer"
-            bulletNumber="6"
+            :bulletNumber="6"
           />
           
           <InputField
@@ -173,7 +173,7 @@ const submitForm = () => {
             description="Where can we find you? LinkedIn/X/Portfolio"
             placeholder=""
             v-model="socialAnswer"
-            bulletNumber="7"
+            :bulletNumber="7"
           />
           
           <div class="submit-button-container">
