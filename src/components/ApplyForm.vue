@@ -14,19 +14,39 @@ const whyAnswer = ref('');
 const frequencyAnswer = ref('');
 const startDateAnswer = ref('');
 const socialAnswer = ref('');
+// Honeypot field to catch bots
+const honeyPotField = ref('');
+
+// Add these refs for UI state handling
+const isSubmitting = ref(false);
+const showSuccessMessage = ref(false);
+const showErrorMessage = ref(false);
 
 const formErrors = ref({
   nameAnswer: '',
   emailAnswer: '',
-  frequencyAnswer: ''
+  workAnswer: '',
+  whyAnswer: '',
+  frequencyAnswer: '',
+  startDateAnswer: '',
+  socialAnswer: ''
 });
 
 const isFormValid = computed(() => {
   return !formErrors.value.nameAnswer && 
          !formErrors.value.emailAnswer && 
+         !formErrors.value.workAnswer && 
+         !formErrors.value.whyAnswer && 
          !formErrors.value.frequencyAnswer &&
+         !formErrors.value.startDateAnswer &&
+         !formErrors.value.socialAnswer &&
          nameAnswer.value && 
-         emailAnswer.value;
+         emailAnswer.value &&
+         workAnswer.value &&
+         whyAnswer.value &&
+         frequencyAnswer.value &&
+         startDateAnswer.value &&
+         socialAnswer.value;
 });
 
 const frequencyOptions = [
@@ -46,7 +66,11 @@ const validateForm = () => {
   formErrors.value = {
     nameAnswer: '',
     emailAnswer: '',
-    frequencyAnswer: ''
+    workAnswer: '',
+    whyAnswer: '',
+    frequencyAnswer: '',
+    startDateAnswer: '',
+    socialAnswer: ''
   };
   
   // Validate name
@@ -61,15 +85,55 @@ const validateForm = () => {
     formErrors.value.emailAnswer = 'Please enter a valid email address';
   }
   
+  // Validate work
+  if (!workAnswer.value.trim()) {
+    formErrors.value.workAnswer = 'Please tell us what you do for work';
+  }
+  
+  // Validate why interested
+  if (!whyAnswer.value.trim()) {
+    formErrors.value.whyAnswer = 'Please tell us why you are interested in Outpost';
+  }
+  
   // Validate frequency selection
   if (frequencyAnswer.value === '') {
     formErrors.value.frequencyAnswer = 'Please select how often you expect to use your desk';
   }
   
+  // Validate start date
+  if (!startDateAnswer.value) {
+    formErrors.value.startDateAnswer = 'Please select when you would want to start';
+  }
+  
+  // Validate social
+  if (!socialAnswer.value.trim()) {
+    formErrors.value.socialAnswer = 'Please provide a social media profile or portfolio';
+  }
+  
   return isFormValid.value;
 };
 
-const submitForm = () => {
+const resetForm = () => {
+  nameAnswer.value = '';
+  emailAnswer.value = '';
+  workAnswer.value = '';
+  whyAnswer.value = '';
+  frequencyAnswer.value = '';
+  startDateAnswer.value = '';
+  socialAnswer.value = '';
+  honeyPotField.value = '';
+};
+
+const submitForm = async () => {
+  // Check if honeypot is filled - if so, act like success but don't submit
+  if (honeyPotField.value) {
+    console.log('Honeypot triggered - likely bot submission');
+    // Fake success to fool the bot
+    resetForm();
+    showSuccessMessage.value = true;
+    return;
+  }
+
   if (validateForm()) {
     const formData = {
       name: nameAnswer.value,
@@ -81,26 +145,33 @@ const submitForm = () => {
       social: socialAnswer.value
     };
     
-    console.log('Form submitted:', formData);
+    // Show loading state
+    isSubmitting.value = true;
     
-    // Here you would typically send the data to your server
-    // For example:
-    // fetch('/api/apply', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   console.log('Success:', data);
-    // })
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // });
-    
-    alert('Application submitted successfully!');
+    try {
+      const response = await fetch('/api/handle-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      // Reset form
+      resetForm();
+      
+      // Show success message
+      showSuccessMessage.value = true;
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      showErrorMessage.value = true;
+    } finally {
+      isSubmitting.value = false;
+    }
   } else {
     console.log('Form has errors, cannot submit');
   }
@@ -110,7 +181,29 @@ const submitForm = () => {
 <template>
   <div class="apply-form">
     <form @submit.prevent="submitForm" class="form-container" novalidate>
-      <div class="form-grid">
+      <div v-if="showSuccessMessage" class="success-message">
+        <h3>Application Submitted!</h3>
+        <p>Thanks for applying to Outpost. We'll be in touch soon!</p>
+      </div>
+      
+      <div v-if="showErrorMessage" class="error-message">
+        <h3>Oops! Something went wrong.</h3>
+        <p>Please try again or contact us directly.</p>
+      </div>
+      
+      <!-- Honeypot field - invisible to humans but bots will fill it -->
+      <div class="honeypot-container">
+        <input 
+          type="text" 
+          name="website" 
+          v-model="honeyPotField" 
+          autocomplete="off" 
+          tabindex="-1"
+          aria-hidden="true"
+        />
+      </div>
+      
+      <div v-if="!showSuccessMessage" class="form-grid">
         <!-- Left Column -->
         <div class="form-column">
           <InputField
@@ -138,6 +231,8 @@ const submitForm = () => {
             placeholder=""
             v-model="workAnswer"
             :bulletNumber="3"
+            required
+            :error="formErrors.workAnswer"
           />
           
           <TextAreaField
@@ -147,6 +242,8 @@ const submitForm = () => {
             v-model="whyAnswer"
             :bulletNumber="4"
             :rows="8"
+            required
+            :error="formErrors.whyAnswer"
           />
         </div>
         
@@ -166,6 +263,8 @@ const submitForm = () => {
             placeholder=""
             v-model="startDateAnswer"
             :bulletNumber="6"
+            required
+            :error="formErrors.startDateAnswer"
           />
           
           <InputField
@@ -174,11 +273,13 @@ const submitForm = () => {
             placeholder=""
             v-model="socialAnswer"
             :bulletNumber="7"
+            required
+            :error="formErrors.socialAnswer"
           />
           
           <div class="submit-button-container">
-            <button type="submit" class="submit-button">
-              Apply for Membership
+            <button type="submit" class="submit-button" :disabled="isSubmitting">
+              {{ isSubmitting ? 'Submitting...' : 'Apply for Membership' }}
             </button>
           </div>
         </div>
@@ -188,7 +289,6 @@ const submitForm = () => {
 </template>
 
 <style scoped>
-
 .form-container {
   width: 100%;
 }
@@ -278,5 +378,42 @@ const submitForm = () => {
 
 .submit-button:focus {
   outline: none;
+}
+
+.success-message, .error-message {
+  background-color: color-mix(in srgb, var(--color-linen) 10%, transparent);
+  border: 1px solid var(--color-linen);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.success-message h3 {
+  color: var(--color-linen);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-message h3 {
+  color: #E53E3E;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.honeypot-container {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
 }
 </style>
