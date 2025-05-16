@@ -1,7 +1,37 @@
-/* Inter Font - Using existing CSS file */
-@import './inter/inter.css';
+/* Inter Font */
+@font-face {
+  font-family: 'Inter';
+  src: var(--font-inter-regular);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-/* Aeonik Font - Regular weight only */
+@font-face {
+  font-family: 'Inter';
+  src: var(--font-inter-medium);
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: var(--font-inter-semibold);
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: var(--font-inter-bold);
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Aeonik Font */
 @font-face {
   font-family: 'Aeonik';
   src: var(--font-aeonik-regular);
