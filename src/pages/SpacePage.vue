@@ -3,12 +3,15 @@ import Header from '../components/MainHeader.vue';
 import Logo from '../components/MainLogo.vue';
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { useSpaceCarousel } from '../scripts/useSpaceCarousel.js';
+import { useBlurryLoad } from '../scripts/useBlurryLoad.js';
 
 const {
   emblaRef,
   emblaApi,
   setupCarousel
 } = useSpaceCarousel();
+
+const { initBlurryLoad } = useBlurryLoad();
 
 let cleanup = null;
 const isMobile = ref(false);
@@ -46,6 +49,7 @@ onMounted(() => {
   if (!isMobile.value) {
     cleanup = setupCarousel();
   }
+  initBlurryLoad();
 });
 
 onUnmounted(() => {
@@ -58,36 +62,43 @@ onUnmounted(() => {
 const carouselSlides = [
   {
     image: '/images/carousel/space-slider-01.webp',
+    smallImage: '/images/carousel/space-slider-01-small.webp',
     bullet: 'images/svg-num/svg-num-01.svg',
     description: 'Lounge Area'
   },
   {
     image: '/images/carousel/space-slider-02.webp',
+    smallImage: '/images/carousel/space-slider-02-small.webp',
     bullet: 'images/svg-num/svg-num-02.svg',
     description: 'Kitchenette'
   },
   {
     image: '/images/carousel/space-slider-06.webp',
+    smallImage: '/images/carousel/space-slider-06-small.webp',
     bullet: 'images/svg-num/svg-num-03.svg',
     description: 'Oak & Concrete'
   },
   {
     image: '/images/carousel/space-slider-03.webp',
+    smallImage: '/images/carousel/space-slider-03-small.webp',
     bullet: 'images/svg-num/svg-num-04.svg',
     description: 'Open space work area'
   },
   {
     image: '/images/carousel/space-slider-04.webp',
+    smallImage: '/images/carousel/space-slider-04-small.webp',
     bullet: 'images/svg-num/svg-num-05.svg',
     description: 'Plants you don\'t have to water'
   },
   {
     image: '/images/carousel/space-slider-05.webp',
+    smallImage: '/images/carousel/space-slider-05-small.webp',
     bullet: 'images/svg-num/svg-num-06.svg',
     description: 'Kitchenette'
   },
   {
     image: '/images/carousel/space-slider-07.webp',
+    smallImage: '/images/carousel/space-slider-07-small.webp',
     bullet: 'images/svg-num/svg-num-07.svg',
     description: 'Lounge Area'
   }
@@ -113,7 +124,12 @@ const carouselSlides = [
           <div class="embla__container">
             <div class="embla__slide" v-for="slide in carouselSlides" :key="slide.image">
               <div class="slide-content">
-                <img :src="slide.image" :alt="slide.description" class="slide-image">
+                <img 
+                  class="blurry-load slide-image"
+                  :src="slide.smallImage"
+                  :data-large="slide.image"
+                  :alt="slide.description"
+                >
                 <div class="slide-description">
                   <div class="flex flex-row gap-3 items-center">
                     <img :src="slide.bullet" :alt="slide.description" class="slide-bullet">
@@ -130,7 +146,12 @@ const carouselSlides = [
       <div v-else class="mobile-images">
         <div class="mobile-slide" v-for="slide in carouselSlides" :key="slide.image">
           <div class="slide-content">
-            <img :src="slide.image" :alt="slide.description" class="slide-image">
+            <img 
+              class="blurry-load slide-image"
+              :src="slide.smallImage"
+              :data-large="slide.image"
+              :alt="slide.description"
+            >
             <div class="slide-description">
               <div class="flex flex-row gap-3 items-center">
                 <img :src="slide.bullet" :alt="slide.description" class="slide-bullet">
@@ -187,16 +208,16 @@ const carouselSlides = [
   overflow: visible;
   width: 100%;
   margin-bottom: 2em;
-  min-height: 560px;
   display: flex;
   flex-direction: column;
+  justify-content: end;
 }
 
 .embla__viewport {
   overflow: visible;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 .embla__container {
@@ -205,12 +226,13 @@ const carouselSlides = [
   gap: 0;
   align-items: stretch;
   justify-content: start;
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 .embla__slide {
   flex: 0 0 80%;
   min-width: 0;
+  height: auto;
   position: relative;
   background-color: var(--color-raisin-black);
   display: flex;
@@ -218,15 +240,15 @@ const carouselSlides = [
   margin-right: 2em;
 
   @media (min-width: 768px) {
-    flex: 0 0 50%;
+    flex: 0 0 60%;
   }
 
   @media (min-width: 1024px) {
-    flex: 0 0 40%;
+    flex: 0 0 50%;
   }
 
   @media (min-width: 1280px) {
-    flex: 0 0 30%;
+    flex: 0 0 40%;
   }
 }
 
@@ -240,7 +262,6 @@ const carouselSlides = [
 
 .mobile-slide {
   width: 100%;
-  height: 480px;
   background-color: var(--color-raisin-black);
   margin-bottom: 1rem;
 }
@@ -256,7 +277,8 @@ const carouselSlides = [
 
 .slide-image {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
   object-fit: cover;
   display: block;
 }

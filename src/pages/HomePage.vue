@@ -3,6 +3,7 @@ import Header from '../components/MainHeader.vue';
 import Logo from '../components/MainLogo.vue';
 import { onMounted, onUnmounted } from 'vue'
 import { useEmblaCarousel } from '../scripts/useEmblaCarousel.js'
+import { useBlurryLoad } from '../scripts/useBlurryLoad.js'
 
 const {
   emblaRef,
@@ -14,10 +15,13 @@ const {
   setupCarousel
 } = useEmblaCarousel()
 
+const { initBlurryLoad } = useBlurryLoad()
+
 let cleanup = null
 
 onMounted(() => {
   cleanup = setupCarousel()
+  initBlurryLoad()
 })
 
 onUnmounted(() => {
@@ -70,13 +74,28 @@ onUnmounted(() => {
     <div class="embla__viewport w-full h-full absolute top-0 left-0 z-0" ref="emblaRef">
       <div class="embla__container w-full h-full absolute top-0 left-0">
         <div class="embla__slide home-embla-slide" data-slide-name="Open Workspace">
-          <img src="/images/homepage/home-bg-03.webp" alt="Common Space" class="w-full h-full object-cover" />
+          <img 
+            class="blurry-load w-full h-full object-cover" 
+            src="/images/homepage/home-bg-03-small.webp" 
+            data-large="/images/homepage/home-bg-03.webp" 
+            alt="Common Space" 
+          />
         </div>
         <div class="embla__slide home-embla-slide" data-slide-name="Kitchenette">
-          <img src="/images/homepage/home-bg-02.webp" alt="Meeting Room" class="w-full h-full object-cover" />
+          <img 
+            class="blurry-load w-full h-full object-cover" 
+            src="/images/homepage/home-bg-02-small.webp" 
+            data-large="/images/homepage/home-bg-02.webp" 
+            alt="Meeting Room" 
+          />
         </div>
         <div class="embla__slide home-embla-slide" data-slide-name="Lounge Area">
-          <img src="/images/homepage/home-bg-01.webp" alt="Phone Booth" class="w-full h-full object-cover" />
+          <img 
+            class="blurry-load w-full h-full object-cover" 
+            src="/images/homepage/home-bg-01-small.webp" 
+            data-large="/images/homepage/home-bg-01.webp" 
+            alt="Phone Booth" 
+          />
         </div>
       </div>
     </div>
