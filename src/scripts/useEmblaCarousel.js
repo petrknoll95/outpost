@@ -17,8 +17,8 @@ export function useEmblaCarousel() {
 
   const slideNames = [
     'Open Workspace',
-    'Kitchenette with dining area',
-    'Lounge area'
+    'Kitchenette',
+    'Lounge Area'
   ]
 
   const updateSlideText = () => {

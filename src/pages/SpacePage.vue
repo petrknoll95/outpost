@@ -59,7 +59,7 @@ const carouselSlides = [
   {
     image: '/images/carousel/space-slider-01.webp',
     bullet: 'images/svg-num/svg-num-01.svg',
-    description: 'Lounge area'
+    description: 'Lounge Area'
   },
   {
     image: '/images/carousel/space-slider-02.webp',
@@ -89,7 +89,7 @@ const carouselSlides = [
   {
     image: '/images/carousel/space-slider-07.webp',
     bullet: 'images/svg-num/svg-num-07.svg',
-    description: 'Lounge area'
+    description: 'Lounge Area'
   }
 ];
 </script>

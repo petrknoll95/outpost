@@ -72,10 +72,10 @@ onUnmounted(() => {
         <div class="embla__slide home-embla-slide" data-slide-name="Open Workspace">
           <img src="/images/homepage/home-bg-03.webp" alt="Common Space" class="w-full h-full object-cover" />
         </div>
-        <div class="embla__slide home-embla-slide" data-slide-name="Kitchenette with dining area">
+        <div class="embla__slide home-embla-slide" data-slide-name="Kitchenette">
           <img src="/images/homepage/home-bg-02.webp" alt="Meeting Room" class="w-full h-full object-cover" />
         </div>
-        <div class="embla__slide home-embla-slide" data-slide-name="Lounge area">
+        <div class="embla__slide home-embla-slide" data-slide-name="Lounge Area">
           <img src="/images/homepage/home-bg-01.webp" alt="Phone Booth" class="w-full h-full object-cover" />
         </div>
       </div>
@@ -168,7 +168,7 @@ onUnmounted(() => {
 
 @media only screen and (max-width: 32rem) {
   .homepage-embla-container:after {
-    background-image: linear-gradient(to top, rgba(41, 37, 34, 0) 0%, rgba(41, 37, 34, 0.75));
+    background-image: linear-gradient(to top, rgba(41, 37, 34, 0) 0%, rgba(41, 37, 34, 0.5) 75%);
   }
 }
 
