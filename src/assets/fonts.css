@@ -4,7 +4,7 @@
 /* Aeonik Font - Regular weight only */
 @font-face {
   font-family: 'Aeonik';
-  src: url('@/assets/aeonik/Aeonik-Regular.woff2') format('woff2');
+  src: var(--font-aeonik-regular);
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'Aeonik';
-  src: url('@/assets/aeonik/Aeonik-RegularItalic.woff2') format('woff2');
+  src: var(--font-aeonik-regular-italic);
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -21,24 +21,24 @@
 /* Fix the font-family name to be consistent with CSS references */
 @font-face {
   font-family: 'Aeonik-Fono';
-  src: url('@/assets/aeonik-fono/AeonikFono-Regular.otf') format('opentype');
+  src: var(--font-aeonik-fono-regular);
   font-weight: 400;
   font-style: normal;
-  font-display: swap; /* Change to swap for better mobile performance */
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Aeonik-Fono';
-  src: url('@/assets/aeonik-fono/AeonikFono-Medium.otf') format('opentype');
+  src: var(--font-aeonik-fono-medium);
   font-weight: 500;
   font-style: normal;
-  font-display: swap; /* Change to swap for better mobile performance */
+  font-display: swap;
 }
 
 /* Add additional weights for Aeonik */
 @font-face {
   font-family: 'Aeonik';
-  src: url('@/assets/aeonik/Aeonik-Medium.woff2') format('woff2');
+  src: var(--font-aeonik-medium);
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -46,7 +46,7 @@
 
 @font-face {
   font-family: 'Aeonik';
-  src: url('@/assets/aeonik/Aeonik-Bold.woff2') format('woff2');
+  src: var(--font-aeonik-bold);
   font-weight: 700;
   font-style: normal;
   font-display: swap;
