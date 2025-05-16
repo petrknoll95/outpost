@@ -16,7 +16,21 @@ import Logo from '../components/MainLogo.vue';
       </div>
     </Header>
     <div class="location_main flex flex-col pt-32 flex-grow justify-end items-stretch">
-      
+      <div class="map-container mb-12">
+        <h2 class="text-3xl mb-6 font-aeonik">Find Us</h2>
+        <p class="mb-6 text-lg">1001 N N Branch St, Chicago, IL 60642</p>
+        <div class="map-wrapper h-[400px] w-full overflow-hidden border border-columbia-blue">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.3071518054644!2d-87.64551552436725!3d41.90814467017693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd33ad0b54b5d%3A0xf12a2e76e3b73b7!2s1001%20N%20Branch%20St%2C%20Chicago%2C%20IL%2060642!5e0!3m2!1sen!2sus!4v1715283940775!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,4 +51,26 @@ import Logo from '../components/MainLogo.vue';
   }
 }
 
+.map-container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.map-wrapper {
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .map-wrapper {
+    height: 300px;
+  }
+}
 </style>
