@@ -35,9 +35,9 @@ onUnmounted(() => {
       </Header>
       <div class="flex flex-col gap-8 lg:grid lg:grid-cols-4 flex-grow ">
       <div class="flex flex-col flex-grow gap-12 items-start justify-end text-linen pt-12 lg:pt-48 lg:col-span-3">
-        <h1 class="text-8xl leading-[0.875em] tracking-[-0.025em] text-balance max-w-[18ch] font-[Aeonik]">Small. Quiet. <br />Built for people who
+        <h1 class="text-8xl leading-[0.875em] tracking-[-0.025em] text-balance max-w-[18ch] font-[var(--font-aeonik)]">Small. Quiet. <br />Built for people who
           actually work.</h1>
-        <p class="text-xs leading-[1.25em] uppercase tracking-[0.025em] font-[Aeonik-Fono] font-medium">16 fixed desks. No hot
+        <p class="text-xs leading-[1.25em] uppercase tracking-[0.025em] font-[var(--font-aeonik-fono)] font-medium">16 fixed desks. No hot
           desk circus. <br />No desk thieves.</p>
       </div>
       <div class="flex flex-col gap-4 items-end justify-end text-linen">
@@ -45,7 +45,7 @@ onUnmounted(() => {
           <div class="embla__progress col-span-4" ref="progressNode">
             <div class="embla__progress__bar"></div>
           </div>
-          <div class="text-sm m-0 col-span-2 font-[Aeonik-Fono]" ref="slideTextNode">Common Space</div>
+          <div class="text-sm m-0 col-span-2 font-[var(--font-aeonik-fono)]" ref="slideTextNode">Common Space</div>
           <div class="embla__buttons col-span-2 flex gap-12 justify-end">
             <button ref="prevBtn" class="embla__button embla__button--prev" type="button">
               <svg class="nav-link-arrow" width="0.875em" height="0.875em" viewBox="0 0 22 22" fill="none"
