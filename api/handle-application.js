@@ -11,6 +11,13 @@ export default async function handler(req, res) {
     // Parse application data
     const formData = req.body;
     
+    // Extra honeypot check on server side (in case client-side validation is bypassed)
+    if (formData.website) {
+      // This is likely a bot submission - silently reject but return success
+      console.log('Server-side honeypot triggered - bot submission detected');
+      return res.status(200).json({ success: true });
+    }
+    
     // Format data for Slack message
     const slackMessage = formatSlackMessage(formData);
     

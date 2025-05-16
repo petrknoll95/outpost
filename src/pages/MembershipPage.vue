@@ -25,7 +25,7 @@ import Logo from '../components/MainLogo.vue';
           <ul class="membership_perks_list text-4xl !font-aeonik leading-[1em] tracking-[-0.025em]">
             <li>
               <img src="/images/icons/desk-office.svg" alt="Desk icon" class="benefit-icon" />
-              <p>Your own fixed desk (no switching, ever)</p>
+              <p>Dedicated spot, shared custom-built white oak desk</p>
             </li>
             <li>
               <img src="/images/icons/people.svg" alt="Meeting room icon" class="benefit-icon" />
@@ -37,11 +37,11 @@ import Logo from '../components/MainLogo.vue';
             </li>
             <li>
               <img src="/images/icons/target.svg" alt="Focus icon" class="benefit-icon" />
-              <p>Quiet Focus Zones</p>
+              <p>Quiet Hours At All Times</p>
             </li>
             <li>
               <img src="/images/icons/chair.svg" alt="Chair icon" class="benefit-icon" />
-              <p>Ergonomic Chairs</p>
+              <p>Immaculate, Shared Kitchen</p>
             </li>
             <li>
               <img src="/images/icons/layout-window.svg" alt="Light icon" class="benefit-icon" />
@@ -53,7 +53,7 @@ import Logo from '../components/MainLogo.vue';
             </li>
             <li>
               <img src="/images/icons/cup-hot.svg" alt="Coffee icon" class="benefit-icon" />
-              <p>Free Coffee, Equipped Kitchenette</p>
+              <p>Free Coffee & Snacks</p>
             </li>
             <li>
               <img src="/images/icons/unlocked.svg" alt="Secure access icon" class="benefit-icon" />
@@ -70,7 +70,7 @@ import Logo from '../components/MainLogo.vue';
           <div class="membership_pricing-card text-timberwolf bg-raisin-black p-8 flex-grow flex flex-col justify-between items-stretch gap-12">
             <div class="flex flex-col gap-12">
               <p class="text-6xl !font-aeonik leading-[1em] tracking-[-0.025em]">
-                $499/month. <br />That's it.
+                $350/month. <br />That's it.
               </p>
               <div class="grid grid-cols-2 gap-8">
                 <div class="flex flex-col gap-2">
