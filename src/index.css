@@ -1,14 +1,5 @@
-@import "tailwindcss";
-
-@layer theme {
-  :root {
-    --font-aeonik: 'Aeonik', sans-serif;
-    --font-aeonik-fono: 'Aeonik-Fono', monospace;
-    --font-inter: 'Inter', sans-serif;
-  }
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
 @font-face {
   font-family: 'Aeonik';
@@ -43,4 +34,10 @@
   src: url('./assets/aeonik-fono/AeonikFono-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
+}
+
+@theme {
+  --font-aeonik: "Aeonik", sans-serif;
+  --font-aeonik-fono: "Aeonik-Fono", monospace;
+  --font-inter: "Inter", sans-serif;
 } 
