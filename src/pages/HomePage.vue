@@ -39,10 +39,8 @@ onUnmounted(() => {
       </Header>
       <div class="flex flex-col gap-8 lg:grid lg:grid-cols-4 flex-grow ">
       <div class="flex flex-col flex-grow gap-12 items-start justify-end text-linen pt-12 lg:pt-48 lg:col-span-3">
-        <h1 class="text-8xl leading-[0.875em] tracking-[-0.025em] text-balance max-w-[18ch] font-aeonik">Small. Quiet. <br />Built for people who
-          actually work.</h1>
-        <p class="text-xs leading-[1.25em] uppercase tracking-[0.025em] font-aeonik-fono font-medium">16 fixed desks. No hot
-          desk circus. <br />No desk thieves.</p>
+        <h1 class="text-8xl leading-[0.875em] tracking-[-0.025em] text-balance max-w-[18ch] font-aeonik">Home for creatives<br />building products and acquiring audience.</h1>
+        <p class="text-xs leading-[1.25em] uppercase tracking-[0.025em] font-aeonik-fono font-medium">16 fixed desks. 5 podcast studios.<br />Immaculate vibes.</p>
       </div>
       <div class="flex flex-col gap-4 items-end justify-end text-linen">
         <div class="embla__controls grid grid-cols-4 gap-y-4 gap-x-2 w-full">
