@@ -31,7 +31,9 @@ const checkMobile = () => {
     // Use setTimeout to ensure DOM is updated before initializing
     setTimeout(() => {
       cleanup = setupCarousel();
-    }, 50);
+      // Reinitialize blur effect after DOM is updated
+      initBlurryLoad();
+    }, 150);
   }
 
   // Handle transition from desktop to mobile
@@ -40,6 +42,11 @@ const checkMobile = () => {
       cleanup();
       cleanup = null;
     }
+    
+    // Reinitialize blur effect after DOM is updated for mobile
+    setTimeout(() => {
+      initBlurryLoad();
+    }, 150);
   }
 };
 
@@ -49,7 +56,11 @@ onMounted(() => {
   if (!isMobile.value) {
     cleanup = setupCarousel();
   }
-  initBlurryLoad();
+  
+  // Initial blur load with small delay to ensure images are in DOM
+  setTimeout(() => {
+    initBlurryLoad();
+  }, 100);
 });
 
 onUnmounted(() => {
@@ -57,6 +68,14 @@ onUnmounted(() => {
   if (cleanup) {
     cleanup();
   }
+});
+
+// Watch for isMobile changes to reinitialize blurry load
+watch(isMobile, () => {
+  // Allow DOM to update first
+  setTimeout(() => {
+    initBlurryLoad();
+  }, 150);
 });
 
 const carouselSlides = [
@@ -240,15 +259,15 @@ const carouselSlides = [
   margin-right: 2em;
 
   @media (min-width: 768px) {
-    flex: 0 0 60%;
-  }
-
-  @media (min-width: 1024px) {
     flex: 0 0 50%;
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1024px) {
     flex: 0 0 40%;
+  }
+
+  @media (min-width: 1280px) {
+    flex: 0 0 30%;
   }
 }
 
