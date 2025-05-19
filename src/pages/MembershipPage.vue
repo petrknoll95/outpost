@@ -22,7 +22,7 @@ import Logo from '../components/MainLogo.vue';
           <p class="text-sm !font-aeonik-fono uppercase tracking-[0.025em] font-medium">
             What's included
           </p>
-          <ul class="membership_perks_list text-4xl !font-aeonik leading-[1em] tracking-[-0.025em]">
+          <ul class="membership_perks_list text-2xl !font-aeonik leading-[1em] tracking-[-0.025em]">
             <li>
               <img src="/images/icons/desk-office.svg" alt="Desk icon" class="benefit-icon" />
               <p>Dedicated spot, shared custom-built white oak desk</p>
