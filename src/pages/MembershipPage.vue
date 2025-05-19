@@ -16,7 +16,7 @@ import Logo from '../components/MainLogo.vue';
         </h1>
       </div>
     </Header>
-    <div class="membership_main flex flex-col pt-40 flex-grow justify-end items-stretch">
+    <div class="membership_main flex flex-col pt-40 pb-16 lg:pb-0 flex-grow justify-end items-stretch">
       <div class="membership_grid grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-16 items-stretch">
         <div class="membership_perks flex flex-col gap-6">
           <p class="text-sm !font-aeonik-fono uppercase tracking-[0.025em] font-medium">

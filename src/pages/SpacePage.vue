@@ -136,7 +136,7 @@ const carouselSlides = [
         </h1>
       </div>
     </Header>
-    <div class="space_main flex flex-col pt-32 flex-grow justify-end items-stretch">
+    <div class="space_main flex flex-col pt-32 flex-grow justify-end items-stretch pb-16 lg:pb-0">
       <!-- Desktop Carousel -->
       <div v-if="!isMobile" class="embla flex-grow">
         <div class="embla__viewport" ref="emblaRef">

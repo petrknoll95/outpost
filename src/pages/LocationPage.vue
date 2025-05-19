@@ -21,7 +21,7 @@ const chicagoCoordinates = [-87.65129737026611, 41.9011667828004];
         </h1>
       </div>
     </Header>
-    <div class="location_main_wrapper pt-32 flex flex-col flex-grow justify-end items-stretch">
+    <div class="location_main_wrapper pt-32 pb-16 lg:pb-0 flex flex-col flex-grow justify-end items-stretch">
       <div class="location_main flex flex-col lg:grid lg:grid-cols-2 gap-8">
         <div class="map-wrapper w-full h-auto aspect-[4/3]">
           <Map 

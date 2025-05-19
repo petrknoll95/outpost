@@ -17,7 +17,7 @@ import ApplyForm from '../components/ApplyForm.vue';
       </div>
     </Header>
     <div class="flex flex-col flex-grow pt-32 items-stretch justify-end">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16 pt-16 border-t-[1px] border-linen">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16 pt-16 pb-16 lg:pb-0 border-t-[1px] border-linen">
       <div class="col-span-1 lg:col-span-1 flex flex-col gap-8 max-w-[40ch]">
         <h2 class="text-4xl !font-aeonik leading-[1em] tracking-[-0.025em] text-balance">
           This isn’t a waitlist. <br />It’s a filter.
